@@ -73,3 +73,58 @@ TOP function is only valid in Microsoft SQL */
 
 select * from customers 
 order by score asc LIMIT 2;
+
+
+select *
+from orders
+;
+
+select *
+from orders
+where orderstatus = 'Delivered'
+order by orderdate DESC limit 2;
+
+/* creating table */
+
+create table persons(
+	id int not null,
+     person_name varchar(50) not null,
+     birth_date date,
+     phone varchar(50) not null,
+     constraint pk_persons primary key (id)
+     );
+     
+/* Alter table */
+
+Alter table persons
+add email varchar(50) not null;    
+
+alter table persons
+drop column phone;
+
+/* Drop table */
+drop table persons;
+
+/* Insert */
+insert into customers(customerid, firstname, lastname, country, score)
+values
+(7,'San','Lee','Japan',700);
+     
+     
+
+
+create table persons(
+	id int not null,
+     person_name varchar(50) not null,
+     birth_date date,
+     phone varchar(50) not null,
+     constraint pk_persons primary key (id)
+     );
+
+/* Inserting data from customers to persons */
+
+select *
+from customers;
+
+
+         
