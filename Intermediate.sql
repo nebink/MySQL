@@ -153,3 +153,29 @@ left join orders as o
 	on c.customerid= o.customerid;
      
 select * from customers;
+select * from orders;
+
+
+/* Right Join */
+/* Get all customers along with their orders, including orders without matching customers */
+
+select 
+	c.firstname,
+     c.country,
+     o.customerid,
+     o.orderid
+from customers as c
+right join orders as o
+	on c.customerid=o.customerid;
+ 
+ 
+ /* full Join */
+
+select 
+	c.firstname,
+     c.country,
+     o.customerid,
+     o.orderid
+from customers as c
+Full join orders as o
+	on c.customerid=o.customerid;
