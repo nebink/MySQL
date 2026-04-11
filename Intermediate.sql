@@ -169,7 +169,7 @@ right join orders as o
 	on c.customerid=o.customerid;
  
  
- /* full Join */
+ /* FULL JOIN (UNION) */
 
 select 
 	c.firstname,
@@ -177,5 +177,117 @@ select
      o.customerid,
      o.orderid
 from customers as c
-Full join orders as o
+left join orders as o
+	on c.customerid=o.customerid
+     
+     union
+     
+select 
+	c.firstname,
+     c.country,
+     o.customerid,
+     o.orderid
+from customers as c
+right join orders as o
 	on c.customerid=o.customerid;
+     
+/* LEFT ANTI JOIN*/
+
+/* get all the customer who haven't placed any order so far */
+
+select
+	c.firstname,
+     c.country,
+     o.customerid,
+     o.orderid
+     from customers as c
+     left join orders as o
+	on  c.customerid= o.customerid
+     where o.customerid is null;
+     
+/* similarly it works for RIGHT ANTI JOIN */
+
+/* 
+#################################################################################################### */
+/* FULL ANTI JOIN*/
+
+select
+	c.firstname,
+     c.country,
+     o.customerid,
+     o.orderid
+     from customers as c
+     left join orders as o
+	on  c.customerid= o.customerid
+     where o.customerid is null
+     
+     union
+
+select
+	c.firstname,
+     c.country,
+     o.customerid,
+     o.orderid
+     from customers as c
+     right join orders as o
+	on  c.customerid= o.customerid
+     where c.customerid is null;
+
+
+/* Sample question: 
+	get all the customers along with their orders, but only for customers
+	who have palced an order (without using inner join)*/
+ 
+ 
+ select *
+ from customers as c
+ left join orders as o
+ on c.customerid = o.customerid
+ where o.customerid is not null;
+ 
+ /* CROSS JOIN*/
+ 
+ Select *
+ from customers as c
+ cross join orders as o ;
+ 
+ /* Cross join doesn't make any sense in this scenario with cutomer and orders table
+ but it can be used to find combinationn in other scenarios*/
+ 
+ /* 
+#################################################################################################### */
+ 
+ 
+ /* MULTIPLE JOIN*/
+ 
+ /* Using salesdb , retrive the list of all orders, olong with the elated customer,
+ product and employee details.
+ for each order, display:
+	order id
+	customer name (firstname)
+	product name
+	sales amount 
+	product price
+     sales's persons name
+ */
+ 
+ 
+select 
+	o.orderid,
+	o.sales,
+	c.firstname as customer_first_name,
+     c.lastname as customer_last_name,
+     p.product,
+     p.price,
+     e.firstname as employee_first_name,
+     e.lastname as  employee_last_name
+from orders as o
+
+	left join customers as c 
+	on c.customerid= o.customerid
+		
+          left join products as p
+          on o.productid= p.productid
+          
+			left join employees as e
+               on o.salespersonid= e.employeeid;
